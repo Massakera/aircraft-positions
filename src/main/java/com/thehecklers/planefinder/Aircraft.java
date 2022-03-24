@@ -1,20 +1,15 @@
-package com.positions.aircraft;
+package com.thehecklers.planefinder;
 
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.Instant;
 
 @Entity
 @Data
@@ -50,9 +45,10 @@ public class Aircraft {
     private Instant posUpdateTime;
     @JsonProperty("bds40_seen_time")
     private Instant bds40SeenTime;
-	
-	public Aircraft(String callsign, String reg, String flightno, String type,
-	int altitude, int heading, int speed, double lat, double lon) {
+
+    public Aircraft(String callsign, String reg, String flightno, String type,
+                    int altitude, int heading, int speed,
+                    double lat, double lon) {
 
         this(null, callsign, "sqwk", reg, flightno, "route", type, "ct",
                 altitude, heading, speed, 0, 0,
@@ -61,15 +57,15 @@ public class Aircraft {
                 Instant.now(), Instant.now(), Instant.now());
     }
 
-	public void setLastSeenTime(long lastSeenTime) {
-		this.lastSeenTime = Instant.ofEpochSecond(lastSeenTime);
-	}
-	public void setPosUpdateTime(long posUpdateTime) {
-		this.posUpdateTime = Instant.ofEpochSecond(posUpdateTime);
-	}
+    public void setLastSeenTime(long lastSeenTime) {
+        this.lastSeenTime = Instant.ofEpochSecond(lastSeenTime);
+    }
 
-	public void setBds40SeenTime(long bds40SeenTime) {
-		this.bds40SeenTime = Instant.ofEpochSecond(bds40SeenTime);
-	}
+    public void setPosUpdateTime(long posUpdateTime) {
+        this.posUpdateTime = Instant.ofEpochSecond(posUpdateTime);
+    }
 
+    public void setBds40SeenTime(long bds40SeenTime) {
+        this.bds40SeenTime = Instant.ofEpochSecond(bds40SeenTime);
+    }
 }
